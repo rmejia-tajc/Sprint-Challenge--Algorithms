@@ -97,7 +97,47 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+        
+
+        # turn light on to indicate sorting is active
+        self.set_light_on()
+        # swap the fist item on the list so robot has something to compare
+        self.swap_item()
+        # while sorting is active...
+        while self.light_is_on():
+            # while robot can move to the right...
+            while self.can_move_right():
+                # compare the robot item with item in list at current position. if robot item is less than list item...
+                if self.compare_item() == -1:
+                    # swap items
+                    self.swap_item()
+                    # move robot right to new position
+                    self.move_right()
+                # if list item is more than robot item...
+                else:
+                    # move robot right to new position
+                    self.move_right()
+            # if can't move right and the list item at current position is None...
+            if self.can_move_right() == False and self.compare_item() == None:
+                # swap the robot item with None
+                self.swap_item()
+                # turn light off to indicate sorting is complete
+                self.set_light_off()
+            # if we can move right or the list item at current position has a value
+            else:
+                # while robot can move to the left...
+                while self.can_move_left():
+                    # move robot left to new position
+                    self.move_left()
+                    # compare the robot's item with item in list at current position. if list item is None...
+                    if self.compare_item() == None:
+                        # swap items so robot has None
+                        self.swap_item()
+                        # move robot right to new position
+                        self.move_right()
+                        # swap items so None has been moved one position to the right
+                        self.swap_item()
+
 
 
 if __name__ == "__main__":
